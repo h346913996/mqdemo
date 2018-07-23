@@ -1,0 +1,41 @@
+server:
+  port: 18991
+
+spring:
+  application:
+    name: MQSender_1
+  rabbitmq:
+    host: 10.10.7.8
+    port: 5672
+    username: guest
+    password: guest
+
+info:
+  app:
+    name: ${spring.application.name}
+    version: 1.0.0
+    time: 2018年07月12日 14:39:05
+  describe: MQSender Demo测试
+  home: /
+  author: Claude....................
+  licensed: MIT Licensed
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    hostname: ${spring.application.name}
+    health-check-url-path: acutator/info
+  client:
+    healthcheck:
+      enable: true
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka
+
+hystrix:
+  command:
+      default:
+        execution:
+          isolation:
+            thread:
+              timeoutInMilliseconds: 60000

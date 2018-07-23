@@ -1,0 +1,42 @@
+server:
+  port: 18881
+
+spring:
+  application:
+    name: MQReceiver_1
+  rabbitmq:
+    host: 10.10.7.3
+    port: 5672
+    username: guest
+    password: guest
+    ##需要使用 rabbitmqctl set_permissions -p / [username]“.*” “.*” “.*” 设置权限以后才能使用该账户访问，创建的账户权限默认都是关闭的，会导致连接失败
+
+info:
+  app:
+    name: ${spring.application.name}
+    version: 1.0.0
+    time: 2018年07月12日 14:39:05
+  describe: MQSender Demo测试
+  home: /
+  author: Claude....................
+  licensed: MIT Licensed
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    hostname: ${spring.application.name}
+    health-check-url-path: acutator/info
+  client:
+    healthcheck:
+      enable: true
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka
+
+hystrix:
+  command:
+      default:
+        execution:
+          isolation:
+            thread:
+              timeoutInMilliseconds: 60000
