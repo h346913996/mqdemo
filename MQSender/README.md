@@ -1,5 +1,5 @@
 
-通过http://localhost:18991/sayhello可以进行消息发送，
+通过localhost:18991/sayhello可以进行消息发送，
 参数：
 msg=要发送的消息
 sender=发送消息给谁，（1:Queue1，2:Queue2，3:广播）
